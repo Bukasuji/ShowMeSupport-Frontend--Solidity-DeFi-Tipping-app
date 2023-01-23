@@ -204,33 +204,33 @@ export default function Home() {
         <meta name="description" content="Tipping site" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-       <nav className={styles.connectSign}>
-         <div>
-         <button onClick={connectWallet} className=
-              {styles.connectButton2}> Connect your wallet </button>
-         </div>
-         <div className={styles.connectStatus}>
+      <nav className={styles.connectSign}>
+        <div>
+          <button onClick={connectWallet} className=
+            {styles.connectButton2}> Connect your wallet </button>
+        </div>
+        <div className={styles.connectStatus}>
           {currentAccount !== "" ? "Connected to" : "Not Connected. Please connect to view supports"} {currentAccount !== "" ? (currentAccount.substring(0, 15) + '...') : ""}
-         </div>  
-        </nav>
+        </div>
+      </nav>
 
       <main className={styles.main}>
-       
+
         <h1 className={styles.title}>
           GoSupport <span className={styles.title2}>Me</span>
         </h1>
-       
+
         <p className={styles.describe}>Kindly fuel our Blockchain journey with your
           support &#128640;</p>
 
         {currentAccount ? (
-          <div >
+          <div className={styles.form} >
             <form noValidate className={styles.formInline}>
               <div className={styles.nameForm}>
                 <label>
                   Name
                 </label>
-                <br />
+
 
                 <input
                   id="name"
@@ -283,12 +283,12 @@ export default function Home() {
           )}
       </main>
 
-      {currentAccount && (<h1>Supports received</h1>)}
+      {currentAccount && (<h1 className={styles.supportH1}>Supports received</h1>)}
 
       {currentAccount && (memos.map((memo, idx) => {
         return (
-          <div key={idx} style={{ border: "2px solid", "borderRadius": "5px", padding: "5px", margin: "5px", width: "60%", background: "#84C7AE",color:"white" }}>
-            <p style={{ "fontWeight": "bold" }}>"{memo.message}"</p>
+          <div key={idx} className={styles.memoList}>
+            <p style={{ "fontWeight": "bold"}}>"{memo.message}"</p>
             <p>From: {memo.name} at {memo.timestamp.toString()}</p>
           </div>
         )
@@ -297,13 +297,7 @@ export default function Home() {
 
 
       <footer className={styles.footer}>
-        <a
-          href="https://alchemy.com/?a=roadtoweb3weektwo"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Created by Binary Brains Group for Grandida Group Project!
-        </a>
+        Created by Binary Brains Group for Grandida Group Project!
       </footer>
 
       <ToastContainer
