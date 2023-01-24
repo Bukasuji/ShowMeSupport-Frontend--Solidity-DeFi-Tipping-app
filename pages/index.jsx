@@ -16,6 +16,7 @@ export default function Home() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [memos, setMemos] = useState([]);
+  const [show, setShow] = useState();
 
   const tipValue = 0.001;
   const [tip, setTip] = useState(1);
@@ -104,6 +105,7 @@ export default function Home() {
 
         console.log("showing support..")
         toast.info("Showing support...");
+        setShow("Showing support...kindly wait");
         const supportTxn = await showMeSupport.showSupport(
           name ? name : "anonymous",
           message ? message : "My support!",
@@ -116,7 +118,8 @@ export default function Home() {
 
         console.log("support shown!");
         toast.success("Awesome! Thanks for your support.");
-
+        setShow();
+       
         // Clear the form fields.
         setName("");
         setMessage("");
@@ -124,6 +127,7 @@ export default function Home() {
     } catch (error) {
       console.log(error);
       toast.error("Ops! Support failed.");
+      setShow();
     }
   };
 
@@ -274,6 +278,7 @@ export default function Home() {
                 >
                   Show Support
                 </button>
+                <span className={styles.show}>{show}</span>
               </div>
             </form>
           </div>
