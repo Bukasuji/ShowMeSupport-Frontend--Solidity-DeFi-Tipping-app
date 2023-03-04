@@ -13,7 +13,7 @@ This is a team project developed for Grandida LLC assessment by a team of four m
 - [@Abbacool](https://github.com/Abbacool)
 
 ## Smartcontract
-The smart contract was deployed on the Goerli testnet.
+The smart contract was deployed to the Goerli testnet.
 link to github repo (https://github.com/Bukasuji/ShowMeSupport-contracts)
  
  ## Live Demo
@@ -66,7 +66,7 @@ https://github.com/easonnong/Buy-Me-a-Coffee.
 ### Steps
 1) Clone the repository by running the following command:
 ```bash
-git clone https://github.com/Orax101/EthereumQuiz-Site.git
+git clone https://github.com/Bukasuji/ShowMeSupport-Frontend--Solidity-DeFi-Tipping-app.git
 ```
 
 2) Navigate to the project directory:
