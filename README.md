@@ -2,7 +2,7 @@
 
 # Go support me
 
- This is a decentralized finance application that allows users to easily give financial support to someone and leave a message of encouragement for the person. This app solves the problem of centralized financial systems, which can be slow, expensive, and restrictive, especially when it comes to small transactions like tipping. With this app, users can easily send small amounts of cryptocurrency to support someone and show their appreciation, without having to worry about high fees or middlemen.
+ This is a decentralized finance application that allows users to easily give financial support to the owner and can leave a message of encouragement for the person. This app solves the problem of centralized financial systems, which can be slow, expensive, and restrictive, especially when it comes to small transactions like tipping. With this app, users can easily send small amounts of cryptocurrency to support someone and show their appreciation, without having to worry about high fees or middlemen.
   
 ## Contributors
 This is a team project developed for Grandida LLC assessment by a team of four members. The team members are:
@@ -28,14 +28,14 @@ link to github repo (https://github.com/Bukasuji/ShowMeSupport-contracts)
 
 **Frontend IDE:** Visual Studiocode. 
 
-**Smart Contract Testing/Deployment:** Remix Online IDE. 
+**Smart Contract /Deployment:** Hardhat. 
 
 
 
 
 ## Features
   
-- **Tipping and Support:**  Users can easily send or receive cryptocurrency for tipping and financial support.
+- **Tipping/Support:**  Users can easily send tipps or financial support to the owner of the app.
 - **Decentralized:** The app is fully decentralized, which means that transactions are processed directly on the blockchain without intermediaries.
 - **Easy-to-Use Interface:** The app has a simple and user-friendly interface that makes it easy for anyone to use, regardless of their technical expertise.
 - **Message of Encouragement:** : After sending a tip, users can leave a message of encouragement for the recipient, which is displayed publicly.
@@ -50,7 +50,7 @@ https://github.com/easonnong/Buy-Me-a-Coffee.
 - Input your cool and unique nickname or username in the "name" field to show off your personality.
 - Leave an awesome message on the message field to inspire and uplift the person you're supporting.
 - Input the amount of support you want to show in the "support" field. One support equals 0.001 ETH, so the more support you show, the bigger your impact.
-- Click the "Show Support" button and watch as your support is instantly sent to the recipient's wallet, spreading positivity and good vibes all around.
+- Click the "Show Support" button and watch as your support is instantly sent, spreading positivity and good vibes all around.
 
  ## DApp Interface
 ![bandicam 2023-03-04 16-19-43-997](https://user-images.githubusercontent.com/74817012/222915502-62219b4a-e7b6-42b6-8cf9-c4d42ac7ff8c.jpg)
@@ -59,8 +59,8 @@ https://github.com/easonnong/Buy-Me-a-Coffee.
 
 ## Installation
 ### Prerequisites
-- Node.js v12 or higher
-- npm v6 or higher
+- Node.js 
+- npm
 - Metamask 
 
 ### Steps
@@ -69,19 +69,14 @@ https://github.com/easonnong/Buy-Me-a-Coffee.
 git clone https://github.com/Bukasuji/ShowMeSupport-Frontend--Solidity-DeFi-Tipping-app.git
 ```
 
-2) Navigate to the project directory:
+2) Install the project dependencies:
 ```bash 
-cd Gosupport_me
-```
-
-3) Install the project dependencies:
-```bash 
-npm instal
+npm install
 ```
 
 4) Start the development server:
 ```bash 
-npm start
+npm run dev
 ```
 
 5) The app will now be running at http://localhost:3000. Connect your wallet to the app and start showing support.
