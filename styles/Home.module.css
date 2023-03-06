@@ -174,7 +174,7 @@
   font-size: 11px;
   color:darkred;
 }
-.memoList{
+.supportList{
   background-color:#F6FBF9;
   border: 2px solid #84c7ae;
   border-radius:10px;
@@ -195,5 +195,10 @@
   100%{opacity: 1;}
 }
 
+.navBar{
+  display: flex;
+}
 
-
+.admin{
+  color: red;
+}
