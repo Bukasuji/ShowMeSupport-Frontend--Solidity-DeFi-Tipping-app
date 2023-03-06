@@ -1,0 +1,65 @@
+ .adminCard{
+    color: black;
+    width: 480px;
+    height: 430px;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid rgb(26, 27, 26);
+
+  }
+
+  .line {
+    width: 100%;
+    height: 2px;
+    margin: 3rem 0;
+    border-radius: 1px;
+
+  position: relative;
+  background-color: var(--light-gray);
+  }
+
+  .line span{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  
+    font-size: 14px;
+    font-weight: 800;
+  
+    padding: 0.5rem;
+  
+    background-color: var(--white);
+  }
+
+  .inputLabel{
+    margin-top: 35px;
+  }
+
+  .input {
+    width: 100%;
+    height: 40px;
+    margin-top: 15px;
+  }
+
+  .addressChangeBtn {
+    width: 100%;
+    height: 40px;
+    margin-top: 15px;
+    background: white;
+    color: rgb(132, 199, 174);
+    border: 2px solid rgb(132, 199, 174);
+    font-weight: bolder;
+
+}
+.withdrawBtn{
+    width: 100%;
+    height: 40px;
+    border: none;
+    color:white;
+    background: rgb(132, 199, 174);
+    font-weight: bolder;
+}
+.cardHelperText{
+    color: red;
+}
