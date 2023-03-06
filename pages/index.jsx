@@ -6,31 +6,34 @@ import "react-toastify/dist/ReactToastify.css";
 import styles from '../styles/Home.module.css'
 import abi from '../utils/SupportContract.json';
 import moment from "moment";
+import Link from "next/link"
 
 export default function Home() {
-  // Contract Address & ABI
+  // Address of the smart contract & ABI
   const address = "0x0B9f832c6180Ff2aa451a41FFA1E38Ab7EB25962"
   const ABI = abi.abi;
 
+  //state variables
   const [account, setAccount] = useState("");
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [supportMessages, setSupportMessages] = useState([]);
   const [show, setShow] = useState();
 
-  const tipValue = 0.001;
-  const [tip, setTip] = useState(1);
-  const tipValueInEth = () => (tip * tipValue).toFixed(3);
+  const supportAmtValue = 0.001;
+  const [supportAmt, setSupportAmt] = useState(1);
+  const supportAmtValueInEth = () => (supportAmt * supportAmtValue).toFixed(3);
 
-  const tipInputHandler = (e) => {
+  const supportAmtInputHandler = (e) => {
     const { value } = e.target;
     if (value <= 1000 && value.length < 5) {
-      setTip(value);
+      setSupportAmt(value);
     }
   };
+  
   const performAction = () => {
     if (account) {
-      showSupport(name, message, tipValueInEth().toString());
+      showSupport(name, message, supportAmtValueInEth().toString());
     } else {
       checkWalletConnection();
     }
@@ -51,14 +54,20 @@ export default function Home() {
     return `${time.format("MMM Do, YYYY - HH:mm:SS a")} GMT${time.format("Z")}`;
   };
 
-  // Wallet connection logic
+  const sortedSupportMessages = [...supportMessages];
+  sortedSupportMessages.sort(
+    (a, b) =>
+      parseFloat(b.timestamp.toString()) - parseFloat(a.timestamp.toString())
+  );
+
+
+ 
+  // function to check if wallet is connected
   const checkWalletConnection = async () => {
     try {
       const { ethereum } = window;
-
       const accounts = await ethereum.request({ method: 'eth_accounts' })
       console.log("accounts: ", accounts);
-
 
       if (accounts.length > 0) {
         const account = accounts[0];
@@ -75,6 +84,7 @@ export default function Home() {
     }
   }
 
+  //function to connect wallet
   const connectWallet = async () => {
     try {
       const { ethereum } = window;
@@ -89,16 +99,18 @@ export default function Home() {
       });
 
       setAccount(accounts[0]);
+    
+    
     } catch (error) {
       console.log(error);
       toast.error("Ops! Failed to connect to wallet.");
     }
   }
 
-  const showSupport = async (name, message, tip) => {
+  //function for when a user show support
+  const showSupport = async (name, message, supportAmt) => {
     try {
       const { ethereum } = window;
-
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum, "any");
         const signer = provider.getSigner();
@@ -107,27 +119,22 @@ export default function Home() {
           ABI,
           signer
         );
-
         console.log("showing support..")
         toast.info("Showing support...");
         setShow("Showing support...kindly wait");
         const supportTxn = await supportContract.showSupport(
           name ? name : "anonymous",
           message ? message : "My support!",
-          { value: ethers.utils.parseEther(tip) }
+          { value: ethers.utils.parseEther(supportAmt) }
         );
-
         await supportTxn.wait();
-
+        // to clear the form fields.
+        setName("");
+        setMessage("");
         console.log("mined ", supportTxn.hash);
-
         console.log("support shown!");
         toast.success("Awesome! Thanks for your support.");
         setShow();
-       
-        // Clear the form fields.
-        setName("");
-        setMessage("");
       }
     } catch (error) {
       console.log(error);
@@ -136,7 +143,7 @@ export default function Home() {
     }
   };
 
-  // Function to get all support messages sent to the owner.
+  // Function to get all the support messages sent to the owner.
   const getAllSupportMessages = async () => {
     try {
       const { ethereum } = window;
@@ -148,8 +155,7 @@ export default function Home() {
           ABI,
           signer
         );
-
-        console.log("fetching memos from the blockchain..");
+        console.log("fetching support messages from the blockchain..");
         const supportMessages = await  supportContract.getAllSupportMessages();
         console.log("fetched!");
         setSupportMessages(supportMessages);
@@ -159,7 +165,7 @@ export default function Home() {
 
     } catch (error) {
       console.log(error);
-      toast.error("Ops! Failed to get the memos.");
+      toast.error("Ops! Failed to get the support messages.");
     }
   };
 
@@ -182,10 +188,9 @@ export default function Home() {
         }
       ]);
     };
-
     const { ethereum } = window;
 
-    // Listen for when support message is created
+    // Listen for when new support message is created
     if (ethereum) {
       const provider = new ethers.providers.Web3Provider(ethereum,
         "any");
@@ -195,10 +200,8 @@ export default function Home() {
         ABI,
         signer
       );
-
       supportContract.on("SupportMessageCreated", onSupportMessageCreated);
     }
-
     return () => {
       if (supportContract) {
         supportContract.off("SupportMessageCreated", onSupportMessageCreated);
@@ -206,6 +209,7 @@ export default function Home() {
     }
   }, []);
 
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -213,14 +217,23 @@ export default function Home() {
         <meta name="description" content="Tipping site" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <nav className={styles.connectSign}>
-        <div>
-          <button onClick={connectWallet} className=
-            {styles.connectButton2}> Connect your wallet </button>
-        </div>
-        <div className={styles.connectStatus}>
-          {account !== "" ? "Connected to" : "Not Connected. Please connect to view supports"} {account !== "" ? (account.substring(0, 15) + '...') : ""}
-        </div>
+      <nav className={styles.navBar}>
+          <div className={styles.connectSign}>
+            <div>
+                <button onClick={connectWallet} className=
+                   {styles.connectButton2}> Connect your wallet </button>
+            </div>
+            <div className={styles.connectStatus}>
+               {account !== "" ? "Connected to" : "Not Connected. Please connect to view supports"} {account !== "" ? (account.substring(0, 15) + '...') : ""}
+            </div>
+          </div>
+          <div className={styles.link}>
+          <Link href="/Admin" >
+             <a className={styles.card}>
+             <h2>Admin &rarr;</h2>
+             </a>
+          </Link>
+          </div>
       </nav>
 
       <main className={styles.main}>
@@ -237,7 +250,7 @@ export default function Home() {
             <form noValidate className={styles.formInline}>
               <div className={styles.nameForm}>
                 <label>
-                  Name
+                  From
                 </label>
 
 
@@ -251,7 +264,7 @@ export default function Home() {
               <br />
               <div className={styles.sendmsgForm}>
                 <label>
-                  Send a message
+                  Support message
                 </label>
                 <br />
 
@@ -271,8 +284,8 @@ export default function Home() {
                   type="number"
                   min={1}
                   max={1000}
-                  value={tip}
-                  onChange={tipInputHandler}
+                  value={supportAmt}
+                  onChange={supportAmtInputHandler}
                 />
               </div>
               <span className={styles.supportValue}>1 support = 0.001ETH, 2 support = 0.002ETH  etc</span>
@@ -295,9 +308,9 @@ export default function Home() {
 
       {account && (<h1 className={styles.supportH1}>Recent Supporters</h1>)}
 
-      {account && (supportMessages.map((supportMessage, idx) => {
+      {account && (sortedSupportMessages.map((supportMessage, idx) => {
         return (
-          <div key={idx} className={styles.memoList}>
+          <div key={idx} className={styles.supportList}>
             <p style={{ "fontWeight": "bold"}}>"{supportMessage.message}"</p>
             <p>From: {supportMessage.name} at {formattedTimestamp(supportMessage.timestamp)}</p>
           </div>
@@ -322,6 +335,7 @@ export default function Home() {
         pauseOnHover
 
       />
+
     </div>
   )
 }
