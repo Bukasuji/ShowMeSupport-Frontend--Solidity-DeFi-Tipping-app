@@ -41,8 +41,8 @@ link to github repo (https://github.com/Bukasuji/ShowMeSupport-contracts)
 - **Message of Encouragement:** : After sending a tip, users can leave a message of encouragement for the recipient, which is displayed publicly.
 
 ## Credits 
-This project was inspired by easonnong Buy-Me-a-Coffee (Alchemy Road to web 3)
-https://github.com/easonnong/Buy-Me-a-Coffee.
+This project was inspired by Alchemy Universty Road to Web3 Tutorial Buy-Me-a-Coffee (Alchemy Road to web 3)
+https://github.com/alchemyplatform/RTW3-Week2-BuyMeACoffee-Contracts.git
 
 ## How The App Works:
 
