@@ -10,7 +10,7 @@ import Link from "next/link"
 
 export default function Home() {
   // Address of the smart contract & ABI
-  const address = "0x0B9f832c6180Ff2aa451a41FFA1E38Ab7EB25962"
+  const address = "0xB4F9B0617EEA9419ab1f6ec58F47829788537711"
   const ABI = abi.abi;
 
   //state variables
@@ -19,11 +19,15 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [supportMessages, setSupportMessages] = useState([]);
   const [show, setShow] = useState();
-
-  const supportAmtValue = 0.001;
   const [supportAmt, setSupportAmt] = useState(1);
-  const supportAmtValueInEth = () => (supportAmt * supportAmtValue).toFixed(3);
 
+  // a constant value for the amount of support per unit.
+  const supportAmtValue = 0.001;
+  
+  // a function to calculate the support amount in Ether.
+  const supportAmtValueInEth = () => (supportAmt * supportAmtValue).toFixed(3);
+  
+  // a function to handle changes to the support amount input field.
   const supportAmtInputHandler = (e) => {
     const { value } = e.target;
     if (value <= 1000 && value.length < 5) {
@@ -31,6 +35,7 @@ export default function Home() {
     }
   };
   
+ // a function to perform the support action.
   const performAction = () => {
     if (account) {
       showSupport(name, message, supportAmtValueInEth().toString());
@@ -40,20 +45,25 @@ export default function Home() {
   };
 
 
+  // a function to update the name state based on input field changes
   const updateName= (event) => {
     setName(event.target.value);
   }
 
+  // a function to update the message state based on input field changes.
   const updateMessage = (event) => {
     setMessage(event.target.value);
   }
 
+  // a function to format the timestamp.
   const formattedTimestamp = (timestamp) => {
+    //Moment.js library to convert the timestamp to a formatted string.
     const time = moment(timestamp.toString() * 1000);
-
+    // Return of the formatted string.
     return `${time.format("MMM Do, YYYY - HH:mm:SS a")} GMT${time.format("Z")}`;
   };
 
+  // a copy of the support messages array sorted  in descending order based on the timestamp.
   const sortedSupportMessages = [...supportMessages];
   sortedSupportMessages.sort(
     (a, b) =>
@@ -143,7 +153,7 @@ export default function Home() {
     }
   };
 
-  // Function to get all the support messages sent to the owner.
+  // Function to get all the support messages.
   const getAllSupportMessages = async () => {
     try {
       const { ethereum } = window;
@@ -174,15 +184,14 @@ export default function Home() {
     checkWalletConnection();
     getAllSupportMessages();
 
-    // An event handler function for when someone sends
-    // a support message.
+    // function to handle support message creation event
     const onSupportMessageCreated = (from, timestamp, name, message) => {
       console.log("Support messages received: ", from, timestamp, name, message);
       setSupportMessages((prevState) => [
         ...prevState,
         {
           address: from,
-          timestamp: new Date(timestamp * 1000),
+          timestamp,
           message,
           name
         }
@@ -200,8 +209,10 @@ export default function Home() {
         ABI,
         signer
       );
-      supportContract.on("SupportMessageCreated", onSupportMessageCreated);
+      supportContract.on("SupportMessageCreated", onSupportMessageCreated);// Listen for the "SupportMessageCreated" event from the contract
     }
+    
+    // Clean up function to remove the event listener when the component unmounts
     return () => {
       if (supportContract) {
         supportContract.off("SupportMessageCreated", onSupportMessageCreated);

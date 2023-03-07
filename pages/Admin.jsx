@@ -7,7 +7,7 @@ import styles from '../styles/Admin.module.css'
 
 
 function Admin(){
-  const address = "0x0B9f832c6180Ff2aa451a41FFA1E38Ab7EB25962"
+  const address = "0xB4F9B0617EEA9419ab1f6ec58F47829788537711"
   const ABI = abi.abi;
   
   const [newContractOwner, setNewContractOwner] = useState("");
