@@ -39,6 +39,8 @@ link to github repo (https://github.com/Bukasuji/ShowMeSupport-contracts)
 - **Decentralized:** The app is fully decentralized, which means that transactions are processed directly on the blockchain without intermediaries.
 - **Easy-to-Use Interface:** The app has a simple and user-friendly interface that makes it easy for anyone to use, regardless of their technical expertise.
 - **Message of Encouragement:** : After sending a tip, users can leave a message of encouragement for the recipient, which is displayed publicly.
+- **Admin:** : The admin page is for only the owner of the contract, it has withdraw support button(for withdrawing of the supports), delete support messages  button(for deleting all support messages) and the change owner address button(for transfering of ownership of the contract).
+
 
 ## Credits 
 This project was inspired by Alchemy Universty Road to Web3 Tutorial Buy-Me-a-Coffee (Alchemy Road to web 3)
@@ -54,7 +56,6 @@ https://github.com/alchemyplatform/RTW3-Week2-BuyMeACoffee-Contracts.git
 
  ## DApp Interface
 ![bandicam 2023-03-09 13-08-11-689](https://user-images.githubusercontent.com/74817012/224020130-037a1dac-7ee8-4c1e-a1f5-6dfadee60a35.jpg)
-![bandicam 2023-03-04 16-19-43-997](https://user-images.githubusercontent.com/74817012/222915502-62219b4a-e7b6-42b6-8cf9-c4d42ac7ff8c.jpg)
 ![bandicam 2023-03-09 13-07-40-540](https://user-images.githubusercontent.com/74817012/224020115-e214a9bf-2cc5-474e-a52c-35a81ecc2ce1.jpg)
 - **Admin Section**  This area  is exclusive to the owner contract, only him can make changes to it:
 ![bandicam 2023-03-09 13-09-55-497](https://user-images.githubusercontent.com/74817012/224021563-eb3031e5-723e-4e19-bb2f-e0c75f32df62.jpg)
