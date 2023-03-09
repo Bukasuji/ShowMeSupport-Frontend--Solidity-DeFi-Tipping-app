@@ -86,6 +86,34 @@ function Admin(){
     }
   };
 
+  //support message delete function
+  const supportMessageDelete = async () => {
+    try {
+      const { ethereum } = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum, "any");
+        const signer = provider.getSigner();
+        const supportContract = new ethers.Contract(
+          address,
+          ABI,
+          signer
+        );
+
+        const deleteMessageTxn = await supportContract.clearSupportMessages() ;
+
+        await deleteMessageTxn.wait();
+        alert("support messages deleted")
+        toast.success("support messages deleted.");
+      }
+    } catch (error) {
+      console.log(error);
+     alert("Ops! failed to delete message")
+    }
+  };
+
+
+
 
   return (
     <div className={styles.container}>
@@ -128,6 +156,10 @@ function Admin(){
 
         <button className={styles.withdrawBtn} onClick={onWithdrawSupport}>
           Withdraw Supports
+        </button>
+
+        <button className={styles.deleteBtn} onClick={supportMessageDelete}>
+          Delete All  messages
         </button>
 
         <p className={styles.cardHelperText}>

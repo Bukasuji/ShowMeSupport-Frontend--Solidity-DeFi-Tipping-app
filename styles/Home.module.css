@@ -1,29 +1,34 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  padding: 0px 0px;
+  
+}
+
+.navBar{
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  margin-left:240px;
+  margin-right:0px;
+  width: 70%;
+}
+
+.adminContainer{
+  margin-left: auto;
 }
 
 .main {
-  padding: 20px 0px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 30px;
+  
+  text-align: center;
+  margin-top:0px;
 }
 
 .footer {
   width: 100%;
-  height: 100px;
+  height: 50px;
   border-top: 1px solid #eaeaea;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top:15px;
+  margin-top: 150px;
+  text-align: center;
+ 
 }
 
 .title {
@@ -55,21 +60,22 @@
 }
 
 .connectButton {
-  background-color:rgb(132, 199, 174) ;
+  background-color:#84c7ae;
   border: none;
   padding: 10px 20px;
   text-decoration: none;
   color: white;
   font-size: 16px;
   font-weight: bold;
-  margin-top: 40px;
+  margin-top: 30px;
   border-radius: 25px;
   cursor: pointer;
   
 }
-.connectSign{
+.connectContainer{
   margin-top: 15px;
-  margin-right:800px;
+  margin-right:auto;
+  margin-left: 0px;
 }
 .connectStatus {
   color:darkred;
@@ -95,6 +101,7 @@
   background: #F6FBF9;
   padding: 40px;
   margin-bottom:0px;
+  text-align: left;
 }
 
 .formInline label {
@@ -125,6 +132,7 @@
   margin-top: 20px;
   font-size: 15px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .formInline button:hover {
@@ -141,7 +149,7 @@
   margin-top: 20px;
   padding: 10px;
   border-radius: 4px;
-  border: 1px solid #91ee9c99;
+ 
   background-color: #eefbee
 }
 .supportTip span {
@@ -175,14 +183,29 @@
   color:darkred;
 }
 .supportList{
-  background-color:#F6FBF9;
-  border: 2px solid #84c7ae;
-  border-radius:10px;
-  padding: 5px;
-  margin: 0px;
-  width: 60%;
   color: black;
+  border:1px solid #91ee9c99;
+  height:570px;
+  width:500px;
+  overflow: auto;
+  background: #F6FBF9;
+  border-radius:10px;
+  padding: 20px;
+  margin-left: auto;
+  margin-top: 40px;
+}
 
+
+
+.messages{
+  border-bottom:  1px solid #84c7ae;
+
+}
+
+.supportHeading {
+ border-bottom:  1px solid #84c7ae;
+ text-align: center;
+ padding-bottom: 10px;
 }
 
 .show {
@@ -195,10 +218,31 @@
   100%{opacity: 1;}
 }
 
-.navBar{
-  display: flex;
+
+
+.supportMessageCard{
+  height:300px;
+  width:400px;
+  overflow: auto;
+  background:#e2861d;
+  border-radius:10px;
+  border-style: solid;
+  padding: 20px;
+  margin-left: 100px;
+  border:1px dotted blue;
+  
+
 }
 
-.admin{
-  color: red;
+.mainBodyContainer{
+  display: flex;
+  margin: 90px auto 0px auto;
+ 
+  width: 70%;
+  justify-content: center;
+  
+}
+
+.image{
+  border:1px solid #91ee9c99;
 }

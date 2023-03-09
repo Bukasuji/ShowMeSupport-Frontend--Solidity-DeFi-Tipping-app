@@ -7,6 +7,7 @@ import styles from '../styles/Home.module.css'
 import abi from '../utils/SupportContract.json';
 import moment from "moment";
 import Link from "next/link"
+import Image from 'next/image';
 
 export default function Home() {
   // Address of the smart contract & ABI
@@ -43,7 +44,6 @@ export default function Home() {
       checkWalletConnection();
     }
   };
-
 
   // a function to update the name state based on input field changes
   const updateName= (event) => {
@@ -223,130 +223,130 @@ export default function Home() {
   
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Show Me Support </title>
-        <meta name="description" content="Tipping site" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <nav className={styles.navBar}>
-          <div className={styles.connectSign}>
-            <div>
-                <button onClick={connectWallet} className=
-                   {styles.connectButton2}> Connect your wallet </button>
+        <Head>
+            <title>Show Me Support </title>
+            <meta name="description" content="Tipping site" />
+            <link rel="icon" href="/favicon.ico" />
+        </Head>
+     
+        <nav className={styles.navBar}>
+            <div className={styles.connectContainer}>
+                <div>
+                    <button onClick={connectWallet} className=
+                      {styles.connectButton2}> Connect your wallet </button>
+                </div>
+            
+                <div className={styles.connectStatus}>
+                  {account !== "" ? "Connected to" : "Not Connected. Please connect to view supports"} {account !== "" ? (account.substring(0, 15) + '...') : ""}
+                </div>
             </div>
-            <div className={styles.connectStatus}>
-               {account !== "" ? "Connected to" : "Not Connected. Please connect to view supports"} {account !== "" ? (account.substring(0, 15) + '...') : ""}
+            <div className={styles.adminContainer}>
+                  <Link href="/Admin" >
+                      <a className={styles.card}>
+                        <h2 className={styles.admintxt}>Admin &rarr;</h2>
+                      </a>
+                  </Link>
             </div>
-          </div>
-          <div className={styles.link}>
-          <Link href="/Admin" >
-             <a className={styles.card}>
-             <h2>Admin &rarr;</h2>
-             </a>
-          </Link>
-          </div>
-      </nav>
+        </nav>
+        
+        <div className={styles.mainBodyContainer}>
+            <main className={styles.main}>
 
-      <main className={styles.main}>
+                <h1 className={styles.title}>
+                   GoSupport <span className={styles.title2}>Me</span>
+                </h1>
 
-        <h1 className={styles.title}>
-          GoSupport <span className={styles.title2}>Me</span>
-        </h1>
-
-        <p className={styles.describe}>Kindly fuel our Blockchain journey with your
-          support &#128640;</p>
-
-        {account ? (
-          <div className={styles.form} >
-            <form noValidate className={styles.formInline}>
-              <div className={styles.nameForm}>
-                <label>
-                  From
-                </label>
-
-
-                <input
-                  id="name"
-                  type="text"
-                  placeholder="anonymous"
-                  onChange={updateName}
-                />
-              </div>
-              <br />
-              <div className={styles.sendmsgForm}>
-                <label>
-                  Support message
-                </label>
-                <br />
-
-                <textarea
-                  rows={3}
-                  placeholder="Support!"
-                  id="message"
-                  onChange={updateMessage}
-                  required
-                >
-                </textarea>
-              </div>
-              <div className={styles.supportTip}>
-                <span>Support:</span>
-
-                <input
-                  type="number"
-                  min={1}
-                  max={1000}
-                  value={supportAmt}
-                  onChange={supportAmtInputHandler}
-                />
-              </div>
-              <span className={styles.supportValue}>1 support = 0.001ETH, 2 support = 0.002ETH  etc</span>
-              <div align="center">
-                <button
-                  type="button"
-                  onClick={performAction}
-                >
-                  Show Support
-                </button>
-                <span className={styles.show}>{show}</span>
-              </div>
-            </form>
-          </div>
-        ) : (
-            <button onClick={connectWallet} className=
-              {styles.connectButton}> Connect your wallet </button>
-          )}
-      </main>
-
-      {account && (<h1 className={styles.supportH1}>Recent Supporters</h1>)}
-
-      {account && (sortedSupportMessages.map((supportMessage, idx) => {
-        return (
-          <div key={idx} className={styles.supportList}>
-            <p style={{ "fontWeight": "bold"}}>"{supportMessage.message}"</p>
-            <p>From: {supportMessage.name} at {formattedTimestamp(supportMessage.timestamp)}</p>
-          </div>
-        )
-      }))}
-
-
-
-      <footer className={styles.footer}>
-        Created by Binary Brains Group for Grandida Group Project!
-      </footer>
-
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-
-      />
-
+                <p className={styles.describe}>Kindly fuel our Blockchain journey with your
+                     support &#128640;</p>
+          {account ? (
+       
+                <div className={styles.form} >
+                    <form noValidate className={styles.formInline}>
+                        <div className={styles.nameForm}>
+                          <label>
+                             From
+                          </label>
+                          <input
+                              id="name"
+                              type="text"
+                              placeholder="anonymous"
+                              onChange={updateName}
+                          />
+                        </div>
+                        <br />
+                        <div className={styles.sendmsgForm}>
+                          <label>
+                             Support message
+                          </label>
+                            <br />
+                            <textarea
+                              rows={3}
+                              placeholder="Support!"
+                              id="message"
+                              onChange={updateMessage}
+                              required
+                            >
+                            </textarea>
+                        </div>
+                        <div className={styles.supportTip}>
+                           <span>Support:</span>
+                              <input
+                                type="number"
+                                min={1}
+                                max={1000}
+                                value={supportAmt}
+                                onChange={supportAmtInputHandler}
+                              />
+                        </div>
+                        <span className={styles.supportValue}>1 support = 0.001ETH, 2 support = 0.002ETH  etc</span>
+                        <div align="center">
+                            <button
+                               type="button"
+                               onClick={performAction}
+                            >
+                                 Show Support
+                            </button>
+                            <span className={styles.show}>{show}</span>
+                        </div>
+                    </form>
+                </div>
+          ) : (
+                <div> 
+                    <div className={styles.image}>
+                       <Image src="/logoz.png" alt="My Image" width={300} height={200} /> 
+                    </div>
+                    <button onClick={connectWallet} className=
+                       {styles.connectButton}> Connect your wallet </button>
+                </div>
+              )}
+            </main>
+    
+            {account && (<div className={styles.supportList}>
+            {account && (<h3 className={styles.supportHeading}>Recent Supporters</h3>)}
+            {account && (sortedSupportMessages.map((supportMessage, idx) => {
+            return (
+                <div key={idx} className={styles.messages}>
+                     <p style={{ "fontWeight": "bold"}}>"{supportMessage.message}"</p>
+                     <p>From: {supportMessage.name} at {formattedTimestamp(supportMessage.timestamp)}</p>
+                </div>
+            )
+            }))}
+            </div>)}
+        </div>
+    
+        <div className={styles.footer}>
+           <p>Created by Binary Brains Group for Grandida Group Project!</p>
+        </div>
+        <ToastContainer
+           position="top-right"
+           autoClose={5000}
+           hideProgressBar={false}
+           newestOnTop={false}
+           closeOnClick
+           rtl={false}
+           pauseOnFocusLoss
+           draggable
+           pauseOnHover />
     </div>
   )
 }
